@@ -28,6 +28,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlWriter;
 import org.dbunit.operation.DatabaseOperation;
+import org.owasp.esapi.*;
 
 /**
  * This is a runnable java class that migrates/converts the current dbunit xml files to a new schema
@@ -168,6 +169,9 @@ public class MigrateDataSet {
 		
 		shellCommand = shellCommand + "mysql -u" + credentials[0] + " -p" + credentials[1];
 		
+		credentials[0] = getValidInput("validate_userID, credentials[0], Validator.SafeString, true, true");
+		credentials[1] = getValidInput("validate_password, credentials[1], Validator.SafeString, true, true");
+
 		if (includeDB)
 			shellCommand = shellCommand + " -D" + tempDatabaseName;
 		
