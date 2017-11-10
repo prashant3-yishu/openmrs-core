@@ -117,7 +117,7 @@ public abstract class StartupFilter implements Filter {
 				servletPath = servletPath.replaceFirst("/initfilter", "/WEB-INF/view"); // strip out the /initfilter part
 				// writes the actual image file path to the response
 				File file = new File(filterConfig.getServletContext().getRealPath(servletPath));
-				if (httpRequest.getPathInfo() != null) {
+				if (httpRequest.getPathInfo() != null && httpRequest.getPathInfo().matches("^(([a-zA-Z]:|\\\\)\\\\)?(((\\.)|(\\.\\.)|([^\\\\/:*?\"|<>. ](([^\\\\/:*?\"|<>. ])))))");) {
 					file = new File(file, httpRequest.getPathInfo());
 				}
 				
